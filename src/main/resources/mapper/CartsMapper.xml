@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.wen.mapper.CartsMapper">
+<resultMap id="BaseResultMapper" type="Carts">
+    <id property="cartsId" column="carts_id"></id>
+    <result property="productId" column="product_id"></result>
+    <result property="userId" column="user_id"></result>
+    <result property="num" column="num"></result>
+</resultMap>
+<insert id="insert">
+    insert into carts(num, product_id, user_id) values (#{carts.num},#{carts.productId},#{carts.userId})
+</insert>
+<select id="selectByUserIdAndProductId" resultMap="BaseResultMapper">
+    select * from carts where product_id=#{proId} and user_id=#{userId}
+</select>
+<update id="updateById">
+    update carts set num=#{num} where carts_id =#{cartId}
+</update>
+<update id="delById">
+    update carts set status=1 where carts_id=#{cartId}
+</update>
+<select id="selectByUserId" resultMap="BaseResultMapper">
+    select * from carts where user_id=#{userId} and status=0
+</select>
+</mapper>
